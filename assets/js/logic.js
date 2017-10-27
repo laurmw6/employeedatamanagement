@@ -48,6 +48,26 @@ $("#submitButton").on("click", function (event) {
 
 });
 
+
+database.ref().on("child_added", function(childSnapshot) {
+    // Log everything that's coming out of snapshot
+    console.log(childSnapshot.val().name);
+    console.log(childSnapshot.val().role);
+    console.log(childSnapshot.val().startDate);
+    console.log(childSnapshot.val().monthlyRate);
+
+    // full list of items to the well
+    $("#current-employees").append("<div class='well'><span id='name'> " + childSnapshot.val().name +
+        " </span><span id='email'> " + childSnapshot.val().role +
+        " </span><span id='age'> " + childSnapshot.val().startDate +
+        " </span><span id='comment'> " + childSnapshot.val().monthlyRate + " </span></div>");
+
+        
+    // Handle the errors
+}, function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
+
 // // Firebase watcher + initial loader HINT: .on("value")
 // database.ref().on("value", function (snapshot) {
 
